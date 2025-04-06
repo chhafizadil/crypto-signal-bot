@@ -16,7 +16,7 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
 bot = telepot.Bot(TELEGRAM_BOT_TOKEN)
 
-# Health Check - Dummy HTTP Server
+# Health Check - Dummy HTTP Server (Listening on port 8000)
 class PingHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         if self.path == '/ping':  # Respond to /ping path
@@ -26,7 +26,7 @@ class PingHandler(BaseHTTPRequestHandler):
             self.wfile.write(b'Healthy')  # Respond with a healthy message
 
 def run_health_check_server():
-    httpd = HTTPServer(('0.0.0.0', 80), PingHandler)
+    httpd = HTTPServer(('0.0.0.0', 8000), PingHandler)  # Listening on port 8000
     httpd.serve_forever()
 
 # Market analysis and bot signal sending
